@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import ChatFooter from "./components/ChatFooter";
 import ChatHeader from "./components/ChatHeader";
-import serviceWorkerDev from "./serviceWorkerDev";
 
 function App() {
   const [input, setInput] = useState("");
   const [answer, setAnswer] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error,setError] = useState()
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -29,7 +29,7 @@ function App() {
         },
         body: JSON.stringify({ message: input }),
       }
-    ).catch((error) => console.log("Server Error", error));
+    );
     const result = await response.json();
     setAnswer((prev) => [...prev, { question: input, answer: result.bot }]);
     setLoading(false);
@@ -41,6 +41,11 @@ function App() {
   return (
       <div className="chat-app">
         <div className="chat-header">
+          {
+            error === 'offline' ? (<div style={{backgroundColor:'yellow', padding:'10px', borderRadius: '12px'}}>
+              <h4 style={{color:'white'}}>Something wrong</h4>
+            </div>):null
+          }
           <ChatHeader setAnswer={setAnswer} />
           <hr />
         </div>
