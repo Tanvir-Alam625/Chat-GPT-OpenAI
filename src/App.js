@@ -85,6 +85,6 @@ function App() {
       </div>
   );
 }
-serviceWorkerDev();
+// serviceWorkerDev();
 
 export default App;
