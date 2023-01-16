@@ -8,7 +8,7 @@ function App() {
   const [input, setInput] = useState("");
   const [answer, setAnswer] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error,setError] = useState()
+  // const [error,setError] = useState()
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -21,7 +21,7 @@ function App() {
     if(input){
       setLoading(true);
     const response = await fetch(
-      "https://tanvir-alam625-chat-gpt-server.onrender.com/",
+      "https://chat-gpt-server-6vap.vercel.app/",
       {
         method: "POST",
         headers: {
@@ -41,11 +41,6 @@ function App() {
   return (
       <div className="chat-app">
         <div className="chat-header">
-          {
-            error === 'offline' ? (<div style={{backgroundColor:'yellow', padding:'10px', borderRadius: '12px'}}>
-              <h4 style={{color:'white'}}>Something wrong</h4>
-            </div>):null
-          }
           <ChatHeader setAnswer={setAnswer} />
           <hr />
         </div>
